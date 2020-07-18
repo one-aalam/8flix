@@ -1,22 +1,19 @@
 import React from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
-
-import { useTrending } from "./hooks/useMovieApi";
+import { HomeScreen } from "./components/HomeScreen";
 
 function App() {
-  const { loading, response } = useTrending();
-
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {loading ? (
+      {/* <header className="App-header"> */}
+      {/* {loading ? (
           <div>loading...</div>
         ) : (
           <div>loaded {JSON.stringify(response)}</div>
-        )}
-      </header>
+        )} */}
+      {/* </header> */}
+      <HomeScreen />
     </div>
   );
 }

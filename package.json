@@ -38,7 +38,9 @@
     ]
   },
   "devDependencies": {
+    "@types/styled-components": "^5.1.1",
     "styled-components": "^5.1.1",
-    "tailwind.macro": "^0.5.10"
+    "tailwind.macro": "^0.5.10",
+    "tailwindcss": "^1.5.1"
   }
 }
