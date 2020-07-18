@@ -6,9 +6,11 @@ import {
   useTrending,
 } from "../hooks/useMovieApi";
 import { CardList } from "./CardList";
+import { Featured } from "./Featured";
 
 export const HomeScreen = () => (
   <>
+    <Featured id="70523" />
     <CardListNetflixOriginal />
     <CardListTopRated />
     <CardListTrending />
