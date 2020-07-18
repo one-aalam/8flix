@@ -18,7 +18,7 @@ export const Card: React.FC<MovieCardProps> = ({ movie, style }) => {
   return (
     <StyledCard
       poster={`${POSTER_PATH}${movie.poster_path}`}
-      className="Movie__Card"
+      className="Card"
       style={style}
     >
       <div className="layer__desc">{movie.title}</div>

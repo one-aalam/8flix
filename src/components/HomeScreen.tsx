@@ -24,7 +24,7 @@ export const CardListNetflixOriginal = () => {
     return <p>Error:</p>;
   }
 
-  return <CardList items={response?.results} />;
+  return <CardList heading="8Flix Originals" items={response?.results} />;
 };
 export const CardListTopRated = () => {
   const { error, loading, response } = useTopRated();
@@ -36,7 +36,7 @@ export const CardListTopRated = () => {
     return <p>Error:</p>;
   }
 
-  return <CardList items={response?.results} />;
+  return <CardList heading="Top Rated" items={response?.results} />;
 };
 export const CardListTrending = () => {
   const { error, loading, response } = useTrending();
@@ -48,5 +48,5 @@ export const CardListTrending = () => {
     return <p>Error:</p>;
   }
 
-  return <CardList items={response?.results} />;
+  return <CardList heading="Trending" items={response?.results} />;
 };
