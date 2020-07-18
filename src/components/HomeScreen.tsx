@@ -27,7 +27,13 @@ export const CardListNetflixOriginal = () => {
     return <p>Error:</p>;
   }
 
-  return <CardList heading="8Flix Originals" items={response?.results} />;
+  return (
+    <CardList
+      heading="8Flix Originals"
+      items={response?.results}
+      style={"portrait"}
+    />
+  );
 };
 export const CardListTopRated = () => {
   const { error, loading, response } = useTopRated();
@@ -39,7 +45,9 @@ export const CardListTopRated = () => {
     return <p>Error:</p>;
   }
 
-  return <CardList heading="Top Rated" items={response?.results} />;
+  return (
+    <CardList heading="Top Rated" items={response?.results} style="landscape" />
+  );
 };
 export const CardListTrending = () => {
   const { error, loading, response } = useTrending();
@@ -51,7 +59,9 @@ export const CardListTrending = () => {
     return <p>Error:</p>;
   }
 
-  return <CardList heading="Trending" items={response?.results} />;
+  return (
+    <CardList heading="Trending" items={response?.results} style={"portrait"} />
+  );
 };
 
 export const CardListGenreAction = () => {
@@ -64,5 +74,11 @@ export const CardListGenreAction = () => {
     return <p>Error:</p>;
   }
 
-  return <CardList heading="Action Movies" items={response?.results} />;
+  return (
+    <CardList
+      heading="Action Movies"
+      items={response?.results}
+      style={"landscape"}
+    />
+  );
 };

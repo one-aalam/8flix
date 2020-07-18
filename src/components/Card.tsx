@@ -4,26 +4,34 @@ import ReactPlayer from "react-player/youtube";
 import getMovieTraileByName from "movie-trailer";
 
 import { ITMDBMovie } from "../interfaces/tmdb";
-import { POSTER_PATH } from "../config/constants";
+import { POSTER_PATH, BACKDROP_PATH } from "../config/constants";
 
 type CardProps = {
   media: ITMDBMovie;
-  poster?: string;
+  poster?: boolean;
   style?: any;
 };
 
 type StyledMediaCardProps = {
-  poster?: string;
+  imgUrl?: string;
+  isPoster?: boolean;
 };
 
-export const Card: React.FC<CardProps> = ({ media, style }) => {
+export const Card: React.FC<CardProps> = ({ media, style, poster }) => {
+  const [isOver, setIsOver] = useState(false);
   const [trailerUrl, setTrailerUrl] = useState("");
   return (
     <StyledCard
-      poster={`${POSTER_PATH}${media.poster_path}`}
+      imgUrl={
+        poster
+          ? `${POSTER_PATH}${media.poster_path}`
+          : `${BACKDROP_PATH}${media.backdrop_path}`
+      }
+      isPoster={poster}
       className="Card"
       style={style}
-      onClick={() => {
+      onMouseEnter={() => {
+        setIsOver(true);
         console.log(media);
         getMovieTraileByName(media.name || media.title)
           .then((url: string) => {
@@ -32,23 +40,36 @@ export const Card: React.FC<CardProps> = ({ media, style }) => {
           })
           .catch(console.error);
       }}
+      onMouseLeave={() => {
+        setIsOver(false);
+        setTrailerUrl("");
+      }}
     >
       {trailerUrl ? (
-        <div className="Trailer__Wrapper" onClick={() => setTrailerUrl("")}>
-          <ReactPlayer url={trailerUrl} />
-        </div>
+        <ReactPlayer
+          url={trailerUrl}
+          playing={true}
+          wrapper={StyledReactPlayer}
+        />
       ) : null}
-
       <div className="layer__desc">{media.title}</div>
     </StyledCard>
   );
 };
 
+export const StyledReactPlayer = styled.div`
+  width: 100%;
+`;
+
 export const StyledCard = styled.div<StyledMediaCardProps>`
-  width: 185px;
-  height: 278px;
-  background: url(${(props) => props.poster}) no-repeat;
+  width: ${(props) => (props.isPoster ? "185px" : "300px")};
+  height: ${(props) => (props.isPoster ? "278px" : "169px")};
+  background: url(${(props) => props.imgUrl}) no-repeat;
+  border-radius: 5px;
   transition: all 0.5s ease;
+  div {
+    width: 100%;
+  }
   .Trailer__Wrapper {
     overflow: hidden;
     div {
@@ -56,7 +77,8 @@ export const StyledCard = styled.div<StyledMediaCardProps>`
     }
   }
   &:hover {
-    transform: scale(1.1) rotate(2deg);
+    transform: scale(1.5);
+    border-radius: 5px;
   }
   .layer__desc,
   .layer__action {

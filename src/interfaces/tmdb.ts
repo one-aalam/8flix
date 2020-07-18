@@ -9,6 +9,7 @@ export interface ITMDBMovie {
   vote_count: number;
   poster_path: string;
   backdrop_path: string;
+  logo_path: string;
   genre_ids: number[];
   original_language: string;
   original_title: string;
