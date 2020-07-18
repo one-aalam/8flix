@@ -15,3 +15,11 @@ export const requiredQueryParams: queryParams = {
 export const defaultQueryParams: queryParams = {
   primary_release_year: 2020,
 };
+
+export const MOVIE_GENRES = {
+  action: 28,
+  comedy: 35,
+  horror: 27,
+  romance: 10749,
+  documentary: 99,
+};

@@ -41,8 +41,11 @@ export interface ITMDBDiscovery {
 
 export type queryParams = {
   with_genres?: number | string | string[];
+  with_networks?: number | string | string[];
   page?: number | string | string[];
   sort_by?: number | string | string[];
   api_key?: string;
   primary_release_year?: number | string | string[];
 };
+
+export type genres = "action" | "comedy" | "horror" | "romance" | "documentary";
