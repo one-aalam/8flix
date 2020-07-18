@@ -51,4 +51,5 @@ export const StyledCard = styled.div<StyledMovieCardProps>`
   &:hover .layer__action {
     visibility: visible;
   }
+  cursor: pointer;
 `;
