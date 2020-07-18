@@ -3,6 +3,7 @@ import {
   useNetflixOriginals,
   useTopRated,
   useTrending,
+  useMovieDiscoverByGenre,
 } from "../hooks/useMovieApi";
 import { CardList } from "./CardList";
 import { Featured } from "./Featured";
@@ -13,6 +14,7 @@ export const HomeScreen = () => (
     <CardListNetflixOriginal />
     <CardListTopRated />
     <CardListTrending />
+    <CardListGenreAction />
   </>
 );
 export const CardListNetflixOriginal = () => {
@@ -50,4 +52,17 @@ export const CardListTrending = () => {
   }
 
   return <CardList heading="Trending" items={response?.results} />;
+};
+
+export const CardListGenreAction = () => {
+  const { error, loading, response } = useMovieDiscoverByGenre("action");
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error:</p>;
+  }
+
+  return <CardList heading="Action Movies" items={response?.results} />;
 };

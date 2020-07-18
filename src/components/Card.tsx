@@ -17,7 +17,6 @@ type StyledMediaCardProps = {
 };
 
 export const Card: React.FC<CardProps> = ({ media, style }) => {
-  const [trailerVisible, setTrailerVisibility] = useState(false);
   const [trailerUrl, setTrailerUrl] = useState("");
   return (
     <StyledCard
@@ -28,17 +27,14 @@ export const Card: React.FC<CardProps> = ({ media, style }) => {
         console.log(media);
         getMovieTraileByName(media.name || media.title)
           .then((url: string) => {
+            console.log(url);
             setTrailerUrl(url);
-            setTrailerVisibility(true);
           })
           .catch(console.error);
       }}
     >
-      {trailerVisible ? (
-        <div
-          className="Trailer__Wrapper"
-          onClick={() => setTrailerVisibility(false)}
-        >
+      {trailerUrl ? (
+        <div className="Trailer__Wrapper" onClick={() => setTrailerUrl("")}>
           <ReactPlayer url={trailerUrl} />
         </div>
       ) : null}
@@ -53,6 +49,12 @@ export const StyledCard = styled.div<StyledMediaCardProps>`
   height: 278px;
   background: url(${(props) => props.poster}) no-repeat;
   transition: all 0.5s ease;
+  .Trailer__Wrapper {
+    overflow: hidden;
+    div {
+      width: 100%;
+    }
+  }
   &:hover {
     transform: scale(1.1) rotate(2deg);
   }
