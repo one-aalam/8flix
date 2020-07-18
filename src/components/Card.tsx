@@ -1,32 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import ReactPlayer from "react-player/youtube";
+import getMovieTraileByName from "movie-trailer";
 
 import { ITMDBMovie } from "../interfaces/tmdb";
 import { POSTER_PATH } from "../config/constants";
 
-type MovieCardProps = {
-  movie: ITMDBMovie;
+type CardProps = {
+  media: ITMDBMovie;
   poster?: string;
   style?: any;
 };
 
-type StyledMovieCardProps = {
+type StyledMediaCardProps = {
   poster?: string;
 };
 
-export const Card: React.FC<MovieCardProps> = ({ movie, style }) => {
+export const Card: React.FC<CardProps> = ({ media, style }) => {
+  const [trailerVisible, setTrailerVisibility] = useState(false);
+  const [trailerUrl, setTrailerUrl] = useState("");
   return (
     <StyledCard
-      poster={`${POSTER_PATH}${movie.poster_path}`}
+      poster={`${POSTER_PATH}${media.poster_path}`}
       className="Card"
       style={style}
+      onClick={() => {
+        console.log(media);
+        getMovieTraileByName(media.name || media.title)
+          .then((url: string) => {
+            setTrailerUrl(url);
+            setTrailerVisibility(true);
+          })
+          .catch(console.error);
+      }}
     >
-      <div className="layer__desc">{movie.title}</div>
+      {trailerVisible ? (
+        <div
+          className="Trailer__Wrapper"
+          onClick={() => setTrailerVisibility(false)}
+        >
+          <ReactPlayer url={trailerUrl} />
+        </div>
+      ) : null}
+
+      <div className="layer__desc">{media.title}</div>
     </StyledCard>
   );
 };
 
-export const StyledCard = styled.div<StyledMovieCardProps>`
+export const StyledCard = styled.div<StyledMediaCardProps>`
   width: 185px;
   height: 278px;
   background: url(${(props) => props.poster}) no-repeat;

@@ -1,6 +1,7 @@
 export interface ITMDBMovie {
   id: number;
   title: string;
+  name: string;
   overview: string;
   release_date: string;
   vote_average: number;

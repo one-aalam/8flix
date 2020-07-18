@@ -14,7 +14,7 @@ export const CardList: React.FC<CardListProps> = ({ items, heading }) => {
       <h3>{heading}</h3>
       <div className="Card__Strip">
         {items.map((movie: any) => (
-          <Card key={movie?.id} movie={movie} />
+          <Card key={movie?.id} media={movie} />
         ))}
       </div>
     </StyledCardList>
